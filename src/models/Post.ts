@@ -1,14 +1,15 @@
-import { Schema } from "mongoose";
+import { Document, Schema, Types, model } from "mongoose";
 
 interface IPost extends Document {
     title: string;
     link?: string;
     body?: string;
     author: Types.ObjectId;
+    createdAt: Date;
     updatedAt: Date;
 }
 
-const PostSchema = new Schema<Post> ({
+const PostSchema = new Schema<IPost> ({
     title: {
         type: String,
         required: true,
@@ -24,10 +25,12 @@ const PostSchema = new Schema<Post> ({
     author: {
         type: Schema.Types.ObjectId,
         ref: 'User',
-        required: true
-
-    }, 
-    
-
+        required: true,
+    }
+}, {
+    timestamps: true
 });
 
+const Post = model<IPost>('Post', PostSchema);
+
+export default Post;
