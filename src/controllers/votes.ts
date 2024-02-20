@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { assertDefined } from "../util/asserts";
+import { assertDefined } from "../util/assertDefined";
 import Post from "../models/Post";
 
 

@@ -33,21 +33,10 @@ UserSchema.pre('save', async function(next) {
     // Vi kör endast om lösenordet ändrats
     if (!this.isModified('password')) return next();
 
-    try {
-        // Vi byter ut klartext lösenordet mot vårt hashade
-        this.password = await bcrypt.hash(this.password, 10);
-        next();
-    } catch (error) {
-        // Om vi får ett fel som genererats av mongoose så låter vi
-        // mongoose hantera det
-        if (error instanceof MongooseError) next(error);
-        // Annars bubblar vi det uppåt
-        else throw error;
-    }
+    const passwordHash = await bcrypt.hash(this.password, 10);
+    this.password = passwordHash;
 })
 
-// model kopplar vårt schema med mongoose och MongoDB
-// Mongoose ser till att vi har en User samling
 const User = model<IUser>('User', UserSchema);
 
 export default User;

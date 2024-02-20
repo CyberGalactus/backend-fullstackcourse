@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import Post from "../models/Post";
-import { assertDefined } from "../util/asserts";
+import { assertDefined } from "../util/assertDefined";
 
 export const createComment = async (req: Request, res: Response) => {
     const { postId } = req.params;

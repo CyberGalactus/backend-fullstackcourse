@@ -21,6 +21,12 @@ const CommentSchema = new Schema<IComment>({
     timestamps: true
 })
 
+interface Image {
+    mimeType: string,
+    size: number;
+    id: Types.ObjectId
+}
+
 interface IPost extends Document {
     title: string;
     link?: string;
