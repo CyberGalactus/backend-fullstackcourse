@@ -4,14 +4,14 @@ import { assertDefined } from "../util/assertDefined";
 
 
 export const create = async (req: Request, res: Response) => {
-    assertDefined(req.userId);
+    assertDefined(req.body.userId);
     const { title, link, body } = req.body;
 
     const post = new Post({
         title,
         link,
         body,
-        author: req.userId
+        author: req.body.userId
     })
 
     try {
@@ -61,7 +61,7 @@ export const getPost = async (req: Request, res: Response) => {
 }
 
 export const deletePost = async (req: Request, res: Response) => {
-    const { userId } = req;
+    const { userId } = req.body;
     const { postId } = req.params
     assertDefined(userId)
     const post = await Post.findById(postId)
@@ -84,7 +84,7 @@ export const deletePost = async (req: Request, res: Response) => {
 }
 
 export const editPost = async (req: Request, res: Response) => {
-    assertDefined(req.userId)
+    assertDefined(req.body.userId)
 
     const { title, link, body } = req.body
 
@@ -95,7 +95,7 @@ export const editPost = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'No post found for id: '})
         }
 
-        if (post.author.toString() !== req.userId) {
+        if (post.author.toString() !== req.body.userId) {
             return res.status(403).json({ message: 'Not authorized' })
         }
 

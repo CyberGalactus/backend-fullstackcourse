@@ -83,7 +83,8 @@ export const refreshJWT = async (req: Request, res: Response) => {
 }
 
 export const profile = async (req: Request, res: Response) => {
-    const { userId } = req 
+    const userId = req.body.userId
+    
 
     const user = await User.findById(userId);
 

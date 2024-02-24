@@ -4,7 +4,7 @@ import { assertDefined } from "../util/assertDefined";
 
 export const createComment = async (req: Request, res: Response) => {
     const { postId } = req.params;
-    const { userId } = req;
+    const { userId } = req.body;
     assertDefined(userId);
 
     const { commentBody } = req.body
@@ -27,7 +27,7 @@ export const createComment = async (req: Request, res: Response) => {
 
 export const deleteComment = async (req: Request, res: Response) => {
     const { postId, commentId } = req.params;
-    const { userId } = req;
+    const { userId } = req.body;
     assertDefined(userId);
 
     const post = await Post.findById(postId);

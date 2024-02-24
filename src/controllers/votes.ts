@@ -5,7 +5,7 @@ import Post from "../models/Post";
 
 export const upvote = async (req: Request, res: Response) => {
     const { postId } = req.params;
-    const { userId } = req;
+    const { userId } = req.body;
     assertDefined(userId);
 
     const post = await Post.findById(postId);
@@ -23,7 +23,7 @@ export const upvote = async (req: Request, res: Response) => {
 
 export const downvote = async (req: Request, res: Response) => {
     const { postId } = req.params;
-    const { userId } = req;
+    const { userId } = req.body;
     assertDefined(userId);
 
     const post = await Post.findById(postId);

@@ -25,7 +25,7 @@ const validateToken = (req: Request, res: Response, next: NextFunction) => {
             return res.status(403).json({message: 'Not authorized'});
         }
 
-        req.userId = decodedPayload.userId
+        req.body.userId = decodedPayload.userId
         next()
     })
 }
