@@ -81,8 +81,8 @@ const PostSchema = new Schema<IPost, IPostModel> ({
     ],
     score: {
         type: Number,
-        default: 0
-    }
+        default: 0,
+    },
 }, {
     timestamps: true
 });
